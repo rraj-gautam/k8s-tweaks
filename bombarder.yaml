@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bombarder
+  labels:
+    app: bombarder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bombarder
+  template:
+    metadata:
+      labels:
+        app: bombarder
+    spec:
+      hostAliases:
+      - ip : "108.118.112.5"
+        hostnames:
+        - "testapp-ingress.sysdaemons.com"
+      containers:
+      - name: bomb
+        image: alpine/bombardier
+        imagePullPolicy: IfNotPresent
+        args: ["-c", "200", "-d", "10s", "-l", "http://testapp-ingress.sysdaemons.com"]
