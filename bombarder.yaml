@@ -23,3 +23,4 @@ spec:
         image: alpine/bombardier
         imagePullPolicy: IfNotPresent
         args: ["-c", "200", "-d", "10s", "-l", "http://testapp-ingress.sysdaemons.com"]
+        #-c=no of connections, -d=interval, -l=hostname
