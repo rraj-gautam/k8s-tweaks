@@ -1,0 +1,22 @@
+# comes with preinstalled network and system debug tools, and runs with root user.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+  labels:
+     app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+          app: debug
+    spec:
+       containers:
+       - name: debug
+         image: rraj4/netshoot
+         command: ["/bin/bash"]
+         args: ["-c", "while true; do ping localhost; sleep 60;done"]
